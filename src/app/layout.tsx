@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { bricolage, inter } from "@/lib/fonts";
-import { ThemeProvider } from "@/lib/themes/next-theme-provider";
+import { ThemeProvider } from "@/lib/providers/next-theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/lib/config";
 import Favicon from "/public/images/Metadata/favicon.ico";

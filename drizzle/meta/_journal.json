@@ -1,0 +1,34 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1706306215391,
+      "tag": "0000_wakeful_wraith",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1706310010557,
+      "tag": "0001_tan_carnage",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706311123640,
+      "tag": "0002_wise_meggan",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1706311712833,
+      "tag": "0003_puzzling_sabretooth",
+      "breakpoints": true
+    }
+  ]
+}
