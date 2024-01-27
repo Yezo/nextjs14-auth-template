@@ -11,7 +11,7 @@ import { bios, songs } from "@/db/schema/user";
 import { auth, signOut } from "@/lib/auth";
 import Link from "next/link";
 
-export async function getSongs() {
+async function getSongs() {
   try {
     const allSongs = await db.select().from(songs);
 
@@ -27,7 +27,7 @@ export async function getSongs() {
   }
 }
 
-export async function getBios() {
+async function getBios() {
   try {
     const allBios = await db.select().from(bios);
 
