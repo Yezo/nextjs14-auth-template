@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     },
   ],
   creator: siteConfig.creator,
-  icons: [{ rel: "icon", url: Favicon.src }],
+
   openGraph: {
     title: siteConfig.name,
     description: siteConfig.description,
