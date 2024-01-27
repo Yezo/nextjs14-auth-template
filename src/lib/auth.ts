@@ -1,6 +1,6 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/db";
-import NextAuth, { NextAuthConfig, Session, User } from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -19,7 +19,7 @@ export const authConfig = {
     }),
   ],
   callbacks: {
-    async session({ session, user }: { session: Session; user?: User }) {
+    async session({ session, user }) {
       if (user && user.id) {
         session.user.id = user.id;
       }

@@ -23,12 +23,32 @@ export const userRelations = relations(users, ({ one, many }) => ({
     fields: [users.id],
     references: [profiles.userId],
   }),
+  bio: one(bios, {
+    fields: [users.id],
+    references: [bios.userId],
+  }),
 }));
 
 export const profiles = pgTable("profiles", {
   id: text("id").primaryKey(),
   bio: varchar("bio", { length: 256 }),
   userId: text("user_id")
+    .notNull()
+    .references(() => users.id),
+});
+
+export const songs = pgTable("Songs", {
+  id: serial("id").primaryKey(),
+  title: varchar("title"),
+  artist: varchar("artist"),
+  album: varchar("album"),
+  duration: varchar("duration"),
+});
+
+export const bios = pgTable("bios", {
+  id: serial("id").primaryKey(),
+  bio: varchar("bio", { length: 256 }),
+  userId: text("userId")
     .notNull()
     .references(() => users.id),
 });
