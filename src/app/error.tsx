@@ -14,7 +14,6 @@ export default function Error({
 }) {
   const router = useRouter();
   const handleGoBackOnePage = () => router.back();
-  const errorMessage = error.message;
 
   return (
     <main className="grid min-h-screen place-items-center">
