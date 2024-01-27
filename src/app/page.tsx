@@ -13,7 +13,7 @@ export default async function Home() {
   //   redirect("/api/auth/signin?callbackUrl=/");
   // }
 
-  const users = await profileQuery.execute();
+  const users = await userQuery.execute();
 
   return (
     <Main className="flex min-h-screen flex-col items-center  p-24">
