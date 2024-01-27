@@ -2,6 +2,7 @@ import { Main } from "@/components/layout/main";
 import { SignOutButton } from "@/components/ui/signout";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { userQuery } from "@/db/queries/findUser";
+import { profileQuery } from "@/db/queries/findUserProfile";
 import { auth, signOut } from "@/lib/auth";
 import Link from "next/link";
 
@@ -12,7 +13,7 @@ export default async function Home() {
   //   redirect("/api/auth/signin?callbackUrl=/");
   // }
 
-  const users = await userQuery.execute();
+  const users = await profileQuery.execute();
 
   return (
     <Main className="flex min-h-screen flex-col items-center  p-24">

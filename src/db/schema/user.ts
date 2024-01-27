@@ -4,8 +4,11 @@ import {
   text,
   primaryKey,
   integer,
+  serial,
+  varchar,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
+import { relations } from "drizzle-orm";
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
@@ -13,6 +16,21 @@ export const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+});
+
+export const userRelations = relations(users, ({ one, many }) => ({
+  profile: one(profiles, {
+    fields: [users.id],
+    references: [profiles.userId],
+  }),
+}));
+
+export const profiles = pgTable("profiles", {
+  id: text("id").primaryKey(),
+  bio: varchar("bio", { length: 256 }),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id),
 });
 
 export const accounts = pgTable(
