@@ -4,8 +4,8 @@ import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/db";
 
 export const authConfig = {
-  adapter: DrizzleAdapter(db),
   providers: [GitHub],
+  adapter: DrizzleAdapter(db),
   callbacks: {
     async session({ session, user }: { session: Session; user?: User }) {
       if (user && user.id) {
