@@ -3,7 +3,6 @@ import { bricolage, inter } from "@/lib/fonts";
 import { ThemeProvider } from "@/lib/providers/next-theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/lib/config";
-import Favicon from "/public/images/Metadata/favicon.ico";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {
@@ -65,7 +64,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <Toaster />
+          <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>

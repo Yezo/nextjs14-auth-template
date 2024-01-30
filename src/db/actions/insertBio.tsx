@@ -1,30 +1,29 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import z, { ZodError } from "zod";
+import { revalidatePath } from "next/cache";
 import { bios } from "@/db/schema/user";
 import { db } from "@/db";
 import { auth } from "@/lib/auth";
+import { bioSchema } from "@/types/zod";
 
-const scheme = z.object({
-  bio: z.string().min(1),
-  userId: z.string().min(1),
-});
-
-export async function createBio(formData: FormData) {
+export async function createBio(values: z.infer<typeof bioSchema>) {
   const session = await auth();
+
+  if (!session?.user.id) {
+    throw new Error("There is no user.");
+  }
   try {
-    const parse = scheme.parse({
-      bio: formData.get("bio"),
-      userId: session?.user.id,
+    const parse = bioSchema.parse({
+      bio: values.bio,
     });
 
     await db.insert(bios).values({
       bio: parse.bio,
-      userId: parse.userId,
+      userId: session.user.id,
     });
 
-    return revalidatePath("/");
+    return revalidatePath("/bio");
   } catch (e) {
     const error = e as ZodError;
 

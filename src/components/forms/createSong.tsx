@@ -1,10 +1,14 @@
 "use client";
 
+import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { createSong } from "@/db/actions/insertSong";
+import { SubmitButton } from "@/components/forms/form-button";
+import { toast } from "sonner";
+import { songSchema } from "@/types/zod";
+import { generateToast } from "@/lib/utils";
 import {
   Form,
   FormControl,
@@ -13,28 +17,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { createSong } from "@/db/actions/insertSong";
-
-const formSchema = z.object({
-  title: z.string().min(2, {
-    message: "title must be at least 2 characters.",
-  }),
-  artist: z.string().min(2, {
-    message: "artist must be at least 2 characters.",
-  }),
-  album: z.string().min(2, {
-    message: "album must be at least 2 characters.",
-  }),
-  duration: z.string().min(2, {
-    message: "duration must be at least 2 characters.",
-  }),
-});
 
 export function SongForm() {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  // Zod schema
+  const form = useForm<z.infer<typeof songSchema>>({
+    resolver: zodResolver(songSchema),
     defaultValues: {
       title: "",
       artist: "",
@@ -43,13 +30,25 @@ export function SongForm() {
     },
   });
 
+  // Takes the form values and executes a server action for inserting
+  // a song into the database and resets the form if successful
+  async function onSubmit(values: z.infer<typeof songSchema>) {
+    try {
+      await createSong(values);
+      generateToast({
+        type: "success",
+        value: "You successfully added a song.",
+      });
+      form.reset();
+      form.clearErrors();
+    } catch (error) {
+      generateToast({ type: "error" });
+    }
+  }
+
   return (
     <Form {...form}>
-      <form
-        // onSubmit={form.handleSubmit(onSubmit)}
-        action={createSong}
-        className="space-y-8"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="title"
@@ -105,7 +104,7 @@ export function SongForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <SubmitButton />
       </form>
     </Form>
   );

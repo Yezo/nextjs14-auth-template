@@ -1,27 +1,18 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import z, { ZodError } from "zod";
-
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres, { PostgresError } from "postgres";
+import { revalidatePath } from "next/cache";
 import { songs } from "@/db/schema/user";
 import { db } from "@/db";
+import { songSchema } from "@/types/zod";
 
-const scheme = z.object({
-  title: z.string().min(1),
-  artist: z.string().min(1),
-  album: z.string().min(1),
-  duration: z.string().min(1),
-});
-
-export async function createSong(formData: FormData) {
+export async function createSong(values: z.infer<typeof songSchema>) {
   try {
-    const parse = scheme.parse({
-      title: formData.get("title"),
-      artist: formData.get("artist"),
-      album: formData.get("album"),
-      duration: formData.get("duration"),
+    const parse = songSchema.parse({
+      title: values.title,
+      artist: values.artist,
+      album: values.album,
+      duration: values.duration,
     });
 
     await db.insert(songs).values({
@@ -31,7 +22,7 @@ export async function createSong(formData: FormData) {
       duration: parse.duration,
     });
 
-    return revalidatePath("/");
+    return revalidatePath("/song");
   } catch (e) {
     const error = e as ZodError;
 

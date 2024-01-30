@@ -1,10 +1,13 @@
 "use client";
 
+import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { createBio } from "@/db/actions/insertBio";
+import { SubmitButton } from "@/components/forms/form-button";
+import { bioSchema } from "@/types/zod";
+import { generateToast } from "@/lib/utils";
 import {
   Form,
   FormControl,
@@ -13,32 +16,35 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { createSong } from "@/db/actions/insertSong";
-import { createBio } from "@/db/actions/insertBio";
-
-const formSchema = z.object({
-  bio: z.string().min(2, {
-    message: "bio must be at least 2 characters.",
-  }),
-});
 
 export function BioForm() {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  // Zod schema
+  const form = useForm<z.infer<typeof bioSchema>>({
+    resolver: zodResolver(bioSchema),
     defaultValues: {
       bio: "",
     },
   });
 
+  // Takes the form values and executes a server action for inserting
+  // a bio into the database and resets the form if successful
+  async function onSubmit(values: z.infer<typeof bioSchema>) {
+    try {
+      await createBio(values);
+      generateToast({
+        type: "success",
+        value: "You successfully added a bio.",
+      });
+      form.reset();
+      form.clearErrors();
+    } catch (error) {
+      generateToast({ type: "error" });
+    }
+  }
+
   return (
     <Form {...form}>
-      <form
-        // onSubmit={form.handleSubmit(onSubmit)}
-        action={createBio}
-        className="space-y-8"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="bio"
@@ -53,7 +59,7 @@ export function BioForm() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <SubmitButton />
       </form>
     </Form>
   );
