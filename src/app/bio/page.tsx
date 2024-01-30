@@ -1,4 +1,4 @@
-import { BioForm } from "@/components/forms/createBio";
+import { BioForm } from "@/components/forms/create-bio-form";
 import { Main } from "@/components/layout/main";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";

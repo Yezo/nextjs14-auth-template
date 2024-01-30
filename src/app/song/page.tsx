@@ -1,4 +1,4 @@
-import { SongForm } from "@/components/forms/createSong";
+import { SongForm } from "@/components/forms/create-song-form";
 import { Main } from "@/components/layout/main";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";
