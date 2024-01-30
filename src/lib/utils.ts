@@ -23,7 +23,7 @@ export function generateToast({
     case "info":
       return toast.info(value);
     case "error":
-      return toast.error("It appears there was an error while submitting.");
+      return toast.error("There was an error while processing your request.");
     case "description":
       return toast.message(value, { description });
     default:

@@ -35,7 +35,7 @@ export function BioForm() {
         type: "success",
         value: "You successfully added a bio.",
       });
-      form.reset();
+      form.reset({});
       form.clearErrors();
     } catch (error) {
       generateToast({ type: "error" });
@@ -50,7 +50,7 @@ export function BioForm() {
           name="bio"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>bio</FormLabel>
+              <FormLabel>Bio</FormLabel>
               <FormControl>
                 <Input placeholder="bio" {...field} />
               </FormControl>
