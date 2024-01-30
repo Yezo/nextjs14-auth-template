@@ -50,13 +50,6 @@ export const authConfig = {
   ],
 
   callbacks: {
-    async session({ session, user }) {
-      if (user && user.id) {
-        session.user.id = user.id;
-      }
-      return session;
-    },
-
     async signIn({ user, account }) {
       if (account?.provider !== "credentials") return true;
 
@@ -72,6 +65,19 @@ export const authConfig = {
 
       token.role = existingUser.role;
       return token;
+    },
+
+    // async session({ session, user }) {
+    //   if (user && user.id) {
+    //     session.user.id = user.id;
+    //   }
+    //   return session;
+    // },
+    session({ session, token }) {
+      if (session.user && token.sub) session.user.id = token.sub;
+      if (session.user && token.role)
+        session.user.role = token.role as UserRole;
+      return session;
     },
   },
 } satisfies NextAuthConfig;
