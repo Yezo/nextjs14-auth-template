@@ -1,8 +1,26 @@
 import { z } from "zod";
 
+export const deleteBioSchema = z.object({
+  id: z.number().int({
+    message: "ID must be an integer.",
+  }),
+  userId: z.string().min(2, {
+    message: "userId must be at least 2 characters.",
+  }),
+});
+
 export const bioSchema = z.object({
   bio: z.string().min(2, {
     message: "Bio must be at least 2 characters.",
+  }),
+});
+
+export const deleteSongSchema = z.object({
+  id: z.number().int({
+    message: "ID must be an integer.",
+  }),
+  userId: z.string().min(2, {
+    message: "userId must be at least 2 characters.",
   }),
 });
 

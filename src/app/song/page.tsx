@@ -1,4 +1,5 @@
 import { SongForm } from "@/components/forms/create-song-form";
+import { DeleteSongButton } from "@/components/forms/delete-song-button";
 import { Main } from "@/components/layout/main";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";
@@ -16,12 +17,14 @@ export default async function SongPage() {
   return (
     <Main className="flex min-h-screen flex-col items-center  p-24">
       {data?.map((item) => (
-        <div key={`song-${item.id}`} className="grid grid-cols-5 px-2 py-1">
+        <div key={`song-${item.id}`} className="grid grid-cols-7 px-2 py-1">
           <div>{item.id}</div>
           <div>{item.title}</div>
           <div>{item.artist}</div>
           <div>{item.album}</div>
           <div>{item.duration}</div>
+          <div>{item.userId}</div>
+          <DeleteSongButton id={item.id} userId={item.userId} />
         </div>
       ))}
 

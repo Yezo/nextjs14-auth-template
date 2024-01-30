@@ -1,4 +1,5 @@
 import { BioForm } from "@/components/forms/create-bio-form";
+import { DeleteBioButton } from "@/components/forms/delete-bio-button";
 import { Main } from "@/components/layout/main";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";
@@ -14,12 +15,13 @@ export default async function SongPage() {
   if (!session?.user) redirect("/api/auth/signin?callbackUrl=/");
 
   return (
-    <Main className="flex min-h-screen flex-col items-center  p-24">
+    <Main className="flex min-h-screen flex-col items-center p-24">
       {data?.map((item) => (
-        <div key={`song-${item.id}`} className="grid grid-cols-5 px-2 py-1">
-          <div>{item.id}</div>
-          <div>{item.bio}</div>
-          <div>{item.userId}</div>
+        <div key={`song-${item.id}`} className="grid grid-cols-4 px-2 py-1">
+          <div className="px-4">{item.id}</div>
+          <div className="px-4">{item.bio}</div>
+          <div className="px-4">{item.userId.slice(0, 10)}</div>
+          <DeleteBioButton id={item.id} userId={item.userId} />
         </div>
       ))}
 

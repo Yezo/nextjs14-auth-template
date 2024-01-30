@@ -43,6 +43,9 @@ export const songs = pgTable("Songs", {
   artist: varchar("artist"),
   album: varchar("album"),
   duration: varchar("duration"),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id),
 });
 
 export const bios = pgTable("bios", {

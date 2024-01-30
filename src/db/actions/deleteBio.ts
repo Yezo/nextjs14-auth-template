@@ -3,11 +3,11 @@
 import z, { ZodError } from "zod";
 import { revalidatePath } from "next/cache";
 import { bios } from "@/db/schema/user";
-import { db } from "@/db";
+import { and, db, eq } from "@/db";
 import { auth } from "@/lib/auth";
-import { bioSchema } from "@/types/zod";
+import { deleteBioSchema } from "@/types/zod";
 
-export async function createBioAction(values: z.infer<typeof bioSchema>) {
+export async function deleteBioAction(values: z.infer<typeof deleteBioSchema>) {
   const session = await auth();
 
   if (!session?.user.id) {
@@ -15,14 +15,14 @@ export async function createBioAction(values: z.infer<typeof bioSchema>) {
   }
 
   try {
-    const parse = bioSchema.parse({
-      bio: values.bio,
+    const parse = deleteBioSchema.parse({
+      id: values.id,
+      userId: values.userId,
     });
 
-    await db.insert(bios).values({
-      bio: parse.bio,
-      userId: session.user.id,
-    });
+    await db
+      .delete(bios)
+      .where(and(eq(bios.id, parse.id), eq(bios.userId, parse.userId)));
 
     return revalidatePath("/bio");
   } catch (e) {
