@@ -38,7 +38,10 @@ export function BioForm() {
       form.reset({});
       form.clearErrors();
     } catch (error) {
-      generateToast({ type: "error" });
+      generateToast({
+        type: "error",
+        value: "There was an error adding a bio.",
+      });
     }
   }
 

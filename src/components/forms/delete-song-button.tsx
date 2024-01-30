@@ -18,7 +18,10 @@ export const DeleteSongButton = ({ id, userId }: DeleteSongButtonProps) => {
         value: "You successfully deleted an item.",
       });
     } catch (error) {
-      generateToast({ type: "error" });
+      generateToast({
+        type: "error",
+        value: "There was an error while processing your request.",
+      });
     }
   };
 

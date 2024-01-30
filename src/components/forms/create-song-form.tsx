@@ -41,7 +41,10 @@ export function SongForm() {
       form.reset();
       form.clearErrors();
     } catch (error) {
-      generateToast({ type: "error" });
+      generateToast({
+        type: "error",
+        value: "There was an error adding a song.",
+      });
     }
   }
 
