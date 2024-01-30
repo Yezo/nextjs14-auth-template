@@ -17,13 +17,13 @@ export function generateToast({
 }) {
   switch (type) {
     case "success":
-      return toast.success(value);
+      return toast.success(value, { description });
     case "warning":
-      return toast.warning(value);
+      return toast.warning(value, { description });
     case "info":
-      return toast.info(value);
+      return toast.info(value, { description });
     case "error":
-      return toast.error("There was an error while processing your request.");
+      return toast.error(value, { description });
     case "description":
       return toast.message(value, { description });
     default:

@@ -6,16 +6,23 @@ import {
   integer,
   serial,
   varchar,
+  pgEnum,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 import { relations } from "drizzle-orm";
 
+export const userRoleEnum = pgEnum("user_role", ["user", "admin"]);
+
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
   name: text("name"),
-  email: text("email").notNull(),
+  username: text("username").unique(),
+  email: text("email").unique().notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
+  password: text("password"),
   image: text("image"),
+  role: userRoleEnum("user").default("user"),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });
 
 export const userRelations = relations(users, ({ one, many }) => ({
@@ -97,3 +104,5 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey(vt.identifier, vt.token),
   }),
 );
+
+export type User = typeof users.$inferSelect;

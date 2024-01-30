@@ -1,3 +1,4 @@
+import { SignUpWithPasswordForm } from "@/components/forms/sign-up-form";
 import { Main } from "@/components/layout/main";
 import { Separator } from "@/components/ui/separator";
 import { SignOutButton } from "@/components/ui/signout";
@@ -9,10 +10,14 @@ export default async function Home() {
 
   return (
     <Main className="flex min-h-screen flex-col items-center  p-24">
-      <h1>Hello, {session?.user.name}.</h1>
-      <h2>You are currently {session ? "logged in." : "logged out"}</h2>
+      <h1>
+        {session
+          ? `Hello, ${session?.user.name}.`
+          : "You are currently not logged in."}
+      </h1>
       <Separator className="my-4" />
-      <Link href="/api/auth/signin/github">Sign In</Link>
+      <Link href="/auth/signup">Sign Up</Link>
+      <Link href="/auth/signin">Sign In</Link>
       <SignOutButton
         signOut={async () => {
           "use server";
