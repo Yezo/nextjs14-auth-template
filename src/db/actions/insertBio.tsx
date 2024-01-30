@@ -7,7 +7,7 @@ import { db } from "@/db";
 import { auth } from "@/lib/auth";
 import { bioSchema } from "@/types/zod";
 
-export async function createBio(values: z.infer<typeof bioSchema>) {
+export async function createBioAction(values: z.infer<typeof bioSchema>) {
   const session = await auth();
 
   if (!session?.user.id) {

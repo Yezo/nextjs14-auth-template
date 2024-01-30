@@ -6,7 +6,7 @@ import { songs } from "@/db/schema/user";
 import { db } from "@/db";
 import { songSchema } from "@/types/zod";
 
-export async function createSong(values: z.infer<typeof songSchema>) {
+export async function createSongAction(values: z.infer<typeof songSchema>) {
   try {
     const parse = songSchema.parse({
       title: values.title,

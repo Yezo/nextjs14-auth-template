@@ -4,7 +4,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { createSong } from "@/db/actions/insertSong";
+import { createSongAction } from "@/db/actions/insertSong";
 import { SubmitButton } from "@/components/forms/form-button";
 import { songSchema } from "@/types/zod";
 import { generateToast } from "@/lib/utils";
@@ -33,7 +33,7 @@ export function SongForm() {
   // a song into the database and resets the form if successful
   async function onSubmit(values: z.infer<typeof songSchema>) {
     try {
-      await createSong(values);
+      await createSongAction(values);
       generateToast({
         type: "success",
         value: "You successfully added a song.",
