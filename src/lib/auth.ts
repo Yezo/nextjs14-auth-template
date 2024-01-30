@@ -1,14 +1,13 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { db, eq } from "@/db";
+import { db } from "@/db";
+import { getUserByEmail, getUserById } from "@/db/actions/user";
+import { signInWithPasswordSchema } from "@/types/zod";
+import { UserRole } from "@/types/next-auth";
 import NextAuth, { NextAuthConfig } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { users } from "@/db/schema/user";
-import { getUserByEmail, getUserById } from "@/db/actions/user";
 import bcryptjs from "bcryptjs";
-import { z } from "zod";
-import { signInWithPasswordSchema } from "@/types/zod";
 
 export const authConfig = {
   session: {
@@ -67,12 +66,6 @@ export const authConfig = {
       return token;
     },
 
-    // async session({ session, user }) {
-    //   if (user && user.id) {
-    //     session.user.id = user.id;
-    //   }
-    //   return session;
-    // },
     session({ session, token }) {
       if (session.user && token.sub) session.user.id = token.sub;
       if (session.user && token.role)

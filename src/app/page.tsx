@@ -12,7 +12,7 @@ export default async function Home() {
     <Main className="flex min-h-screen flex-col items-center  p-24">
       <h1>
         {session
-          ? `Hello, ${session?.user.name}.`
+          ? `Hello, ${session?.user.name} with id ${session?.user.id}.`
           : "You are currently not logged in."}
       </h1>
       <Separator className="my-4" />
