@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { generateToast } from "@/lib/utils";
 import { signUpWithPassword } from "@/db/actions/user";
-import { SubmitButton } from "@/components/forms/form-button";
+import { SubmitButton } from "@/components/forms/FormSubmitButton";
 import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import {
   Form,

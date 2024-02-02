@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SubmitButton } from "@/components/forms/form-button";
+import { SubmitButton } from "@/components/forms/FormSubmitButton";
 import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { generateToast } from "@/lib/utils";
 import {

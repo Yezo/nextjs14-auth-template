@@ -1,5 +1,5 @@
-import { SignUpWithPasswordForm } from "@/components/forms/sign-up-form";
-import { Main } from "@/components/layout/main";
+import { SignUpWithPasswordForm } from "@/components/forms/SignUpForm";
+import { Main } from "@/components/layout/Main";
 import { Separator } from "@/components/ui/separator";
 import { SignOutButton } from "@/components/ui/signout";
 import { auth, signOut } from "@/lib/auth";

@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { createBioAction } from "@/db/actions/insertBio";
-import { SubmitButton } from "@/components/forms/form-button";
+import { SubmitButton } from "@/components/forms/FormSubmitButton";
 import { bioSchema } from "@/types/zod";
 import { generateToast } from "@/lib/utils";
 import {
