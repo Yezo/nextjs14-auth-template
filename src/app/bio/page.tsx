@@ -1,6 +1,6 @@
 import { BioForm } from "@/components/forms/CreateBioForm";
 import { DeleteBioButton } from "@/components/forms/DeleteBioButton";
-import { Main } from "@/components/layout/Main";
+import { Main } from "@/components/layout/main";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";
 import { bios } from "@/db/schema/user";

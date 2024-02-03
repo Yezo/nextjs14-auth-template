@@ -1,5 +1,5 @@
 import { SignUpWithPasswordForm } from "@/components/forms/SignUpForm";
-import { Main } from "@/components/layout/Main";
+import { Main } from "@/components/layout/main";
 import { auth } from "@/lib/auth";
 
 export default async function SignUpPage() {

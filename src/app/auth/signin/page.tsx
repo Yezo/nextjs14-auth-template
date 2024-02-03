@@ -1,10 +1,8 @@
-import { Main } from "@/components/layout/Main";
+import { Main } from "@/components/layout/main";
 import { auth } from "@/lib/auth";
-import {
-  GithubSignInButton,
-  GoogleSignInButton,
-} from "@/components/layout/signin-button";
 import { SignInWithPasswordForm } from "@/components/forms/SignInForm";
+import { GithubSignInButton } from "@/components/layout/SignInButtonGitHub";
+import { GoogleSignInButton } from "@/components/layout/SignInButtonGoogle";
 
 export default async function SignInPage() {
   const session = await auth();

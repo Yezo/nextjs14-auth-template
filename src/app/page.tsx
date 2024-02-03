@@ -1,15 +1,20 @@
 import { SignUpWithPasswordForm } from "@/components/forms/SignUpForm";
-import { Main } from "@/components/layout/Main";
+
+import { GithubSignInButton } from "@/components/layout/SignInButtonGitHub";
+import { SignInButtonWithProvider } from "@/components/layout/SignInButtonProvider";
+import { Main } from "@/components/layout/main";
+
 import { Separator } from "@/components/ui/separator";
 import { SignOutButton } from "@/components/ui/signout";
 import { auth, signOut } from "@/lib/auth";
+
 import Link from "next/link";
 
 export default async function Home() {
   const session = await auth();
 
   return (
-    <Main className="flex min-h-screen flex-col items-center  p-24">
+    <Main className="flex min-h-screen flex-col items-center p-24">
       <h1>
         {session
           ? `Hello, ${session?.user.name} with id ${session?.user.id}.`
@@ -24,6 +29,9 @@ export default async function Home() {
           await signOut({ redirectTo: "/" });
         }}
       />
+
+      <SignInButtonWithProvider provider={"google"} />
+      <SignInButtonWithProvider provider={"github"} />
     </Main>
   );
 }
