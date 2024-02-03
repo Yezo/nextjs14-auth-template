@@ -151,7 +151,7 @@ export function SignInWithPasswordForm(): JSX.Element {
           )}
         />
 
-        <SubmitButton>Signin</SubmitButton>
+        <SubmitButton>Log in</SubmitButton>
       </form>
     </Form>
   );
