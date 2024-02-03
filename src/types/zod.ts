@@ -35,22 +35,16 @@ const passwordSchema = z
     message: "Password must be made of at most 256 characters",
   });
 
-export const signUpWithPasswordSchema = z
-  .object({
-    email: emailSchema,
-    password: passwordSchema.regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
-      {
-        message:
-          "Password must contain at least 8 characters, including one uppercase, one lowercase, one number and one special character",
-      },
-    ),
-    confirmPassword: z.string(),
-  })
-  .refine((schema) => schema.password === schema.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
+export const signUpWithPasswordSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema.regex(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
+    {
+      message:
+        "Password must contain at least 8 characters, including one uppercase, one lowercase, one number and one special character",
+    },
+  ),
+});
 
 export const deleteBioSchema = z.object({
   id: z.number().int({

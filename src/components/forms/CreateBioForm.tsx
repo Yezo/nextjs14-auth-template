@@ -62,7 +62,7 @@ export function BioForm() {
           )}
         />
 
-        <SubmitButton />
+        <SubmitButton>Submit</SubmitButton>
       </form>
     </Form>
   );

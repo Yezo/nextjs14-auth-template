@@ -7,5 +7,5 @@ export type MainProps = {
 };
 
 export const Main = ({ className, children }: MainProps) => {
-  return <main className={cn("container ", className)}>{children}</main>;
+  return <main className={cn("container", className)}>{children}</main>;
 };

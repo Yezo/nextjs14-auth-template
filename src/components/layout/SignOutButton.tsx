@@ -9,7 +9,7 @@ type SignOutButtonProps = {
 export const SignOutButton = ({ signOut }: SignOutButtonProps) => {
   return (
     <Button
-      className="text-neutral-500 hover:text-neutral-700"
+      variant={"destructive"}
       onClick={() => {
         signOut();
       }}

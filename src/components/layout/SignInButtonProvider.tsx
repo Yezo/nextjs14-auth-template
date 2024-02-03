@@ -21,13 +21,12 @@ export function SignInButtonWithProvider({
   return (
     <Button
       onClick={handleClick}
-      className="border-[#ffffff14]] text-gray my-2 flex h-11 w-80 items-center justify-center rounded-full border bg-[#ffffff0f] px-10 py-5 font-bricolage text-sm backdrop-blur-sm transition-colors duration-300 hover:bg-[#ffffff14]"
+      variant="outline"
+      className="flex h-11 w-full items-center justify-center border p-5 font-bricolage text-sm transition-colors duration-300"
     >
       {provider === "google" && <GoogleIcon />}
       {provider === "github" && <GithubIcon />}
-      <span className="ml-4">
-        Signup with {capitalizeFirstLetter(provider)}
-      </span>
+      <span className="ml-4">{capitalizeFirstLetter(provider)}</span>
     </Button>
   );
 }

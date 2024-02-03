@@ -1,14 +1,9 @@
-import { SignUpWithPasswordForm } from "@/components/forms/SignUpForm";
-
-import { GithubSignInButton } from "@/components/layout/SignInButtonGitHub";
-import { SignInButtonWithProvider } from "@/components/layout/SignInButtonProvider";
-import { Main } from "@/components/layout/main";
-
+import { Main } from "@/components/layout/Main";
 import { Separator } from "@/components/ui/separator";
-import { SignOutButton } from "@/components/ui/signout";
+import { SignOutButton } from "@/components/layout/SignOutButton";
 import { auth, signOut } from "@/lib/auth";
-
-import Link from "next/link";
+import { LoginButton } from "@/components/layout/LoginButton";
+import { SignUpButton } from "@/components/layout/SignUpButton";
 
 export default async function Home() {
   const session = await auth();
@@ -21,17 +16,19 @@ export default async function Home() {
           : "You are currently not logged in."}
       </h1>
       <Separator className="my-4" />
-      <Link href="/auth/signup">Sign Up</Link>
-      <Link href="/auth/signin">Sign In</Link>
-      <SignOutButton
-        signOut={async () => {
-          "use server";
-          await signOut({ redirectTo: "/" });
-        }}
-      />
 
-      <SignInButtonWithProvider provider={"google"} />
-      <SignInButtonWithProvider provider={"github"} />
+      <div className="flex gap-2">
+        <LoginButton />
+        <SignUpButton />
+        <SignOutButton
+          signOut={async () => {
+            "use server";
+            await signOut({ redirectTo: "/" });
+          }}
+        />
+      </div>
+
+      <Separator className="my-4" />
     </Main>
   );
 }

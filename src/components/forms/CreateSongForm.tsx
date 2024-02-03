@@ -106,7 +106,7 @@ export function SongForm() {
             </FormItem>
           )}
         />
-        <SubmitButton />
+        <SubmitButton>Submit</SubmitButton>
       </form>
     </Form>
   );

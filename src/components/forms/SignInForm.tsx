@@ -2,19 +2,9 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signInWithPassword } from "@/db/actions/user";
 import { useForm } from "react-hook-form";
-
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/forms/FormSubmitButton";
 import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
@@ -23,7 +13,14 @@ import {
   SignInWithPasswordFormInput,
   signInWithPasswordSchema,
 } from "@/types/zod";
-import { signInWithPassword } from "@/db/actions/user";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 export function SignInWithPasswordForm(): JSX.Element {
   const router = useRouter();
@@ -111,7 +108,11 @@ export function SignInWithPasswordForm(): JSX.Element {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="acme@gmail.com" {...field} />
+                <Input
+                  placeholder="acme@example.com"
+                  {...field}
+                  className="flex h-11 items-center justify-center border bg-[#ffffff0f] p-4 font-bricolage text-sm placeholder-gray transition-colors duration-300 placeholder:opacity-[0.5]"
+                />
               </FormControl>
               <FormMessage className="pt-2 sm:text-sm" />
             </FormItem>
@@ -127,9 +128,9 @@ export function SignInWithPasswordForm(): JSX.Element {
               <FormControl>
                 <div className="flex items-center">
                   <Input
-                    placeholder="********"
+                    placeholder="**********"
                     type={passwordVisiblity ? "text" : "password"}
-                    className="text-xs placeholder:text-xs"
+                    className="flex h-11 items-center justify-center border bg-[#ffffff0f] p-4 font-bricolage text-sm placeholder-gray transition-colors duration-300 placeholder:opacity-[0.5] "
                     {...field}
                   />
                   {passwordVisiblity ? (
@@ -150,7 +151,7 @@ export function SignInWithPasswordForm(): JSX.Element {
           )}
         />
 
-        <SubmitButton />
+        <SubmitButton>Signin</SubmitButton>
       </form>
     </Form>
   );

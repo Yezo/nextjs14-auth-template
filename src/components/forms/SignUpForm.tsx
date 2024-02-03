@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -9,6 +8,11 @@ import { generateToast } from "@/lib/utils";
 import { signUpWithPassword } from "@/db/actions/user";
 import { SubmitButton } from "@/components/forms/FormSubmitButton";
 import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
+import { Input } from "@/components/ui/input";
+import {
+  SignUpWithPasswordFormInput,
+  signUpWithPasswordSchema,
+} from "@/types/zod";
 import {
   Form,
   FormControl,
@@ -17,11 +21,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  SignUpWithPasswordFormInput,
-  signUpWithPasswordSchema,
-} from "@/types/zod";
 
 export function SignUpWithPasswordForm() {
   const router = useRouter();
@@ -32,7 +31,6 @@ export function SignUpWithPasswordForm() {
     defaultValues: {
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
@@ -41,7 +39,6 @@ export function SignUpWithPasswordForm() {
       const message = await signUpWithPassword({
         email: formData.email,
         password: formData.password,
-        confirmPassword: formData.confirmPassword,
       });
 
       switch (message) {
@@ -89,7 +86,11 @@ export function SignUpWithPasswordForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="acme@gmail.com" {...field} />
+                <Input
+                  placeholder="acme@example.com"
+                  {...field}
+                  className="flex h-11 items-center justify-center border bg-[#ffffff0f] p-4 font-bricolage text-sm placeholder-gray transition-colors duration-300 placeholder:opacity-[0.5] hover:bg-[#ffffff14]"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -105,9 +106,9 @@ export function SignUpWithPasswordForm() {
               <FormControl>
                 <div className="flex items-center">
                   <Input
-                    placeholder="********"
+                    placeholder="**********"
                     type={passwordVisiblity ? "text" : "password"}
-                    className="text-xs placeholder:text-xs"
+                    className="flex h-11 items-center justify-center border bg-[#ffffff0f] p-4 font-bricolage text-sm placeholder-gray transition-colors duration-300 placeholder:opacity-[0.5] hover:bg-[#ffffff14]"
                     {...field}
                   />
                   {passwordVisiblity ? (
@@ -128,39 +129,7 @@ export function SignUpWithPasswordForm() {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
-              <FormControl>
-                <div className="flex items-center">
-                  <Input
-                    placeholder="********"
-                    type={passwordVisiblity ? "text" : "password"}
-                    className="text-xs placeholder:text-xs"
-                    {...field}
-                  />
-                  {passwordVisiblity ? (
-                    <EyeNoneIcon
-                      className="-m-8 cursor-pointer text-muted-foreground"
-                      onClick={() => setPasswordVisiblity(!passwordVisiblity)}
-                    />
-                  ) : (
-                    <EyeOpenIcon
-                      className="-m-8 cursor-pointer text-muted-foreground"
-                      onClick={() => setPasswordVisiblity(!passwordVisiblity)}
-                    />
-                  )}
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <SubmitButton />
+        <SubmitButton>Create account</SubmitButton>
       </form>
     </Form>
   );

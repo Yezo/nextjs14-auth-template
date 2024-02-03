@@ -1,6 +1,6 @@
 import { SongForm } from "@/components/forms/CreateSongForm";
 import { DeleteSongButton } from "@/components/forms/DeleteSongButton";
-import { Main } from "@/components/layout/main";
+import { Main } from "@/components/layout/Main";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";
 import { songs } from "@/db/schema/user";
