@@ -18,14 +18,19 @@ export default async function Home() {
       <Separator className="my-4" />
 
       <div className="flex gap-2">
-        <LoginButton />
-        <SignUpButton />
-        <SignOutButton
-          signOut={async () => {
-            "use server";
-            await signOut({ redirectTo: "/" });
-          }}
-        />
+        {session && session.user ? (
+          <SignOutButton
+            signOut={async () => {
+              "use server";
+              await signOut({ redirectTo: "/" });
+            }}
+          />
+        ) : (
+          <>
+            <LoginButton />
+            <SignUpButton />
+          </>
+        )}
       </div>
 
       <Separator className="my-4" />
