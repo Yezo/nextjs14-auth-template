@@ -56,7 +56,7 @@ export function SignUpWithPasswordForm() {
             value: "Success!",
             description: "Your account was successfully created.",
           });
-          router.push("/auth/signin");
+          router.push("/login");
           break;
         default:
           generateToast({
