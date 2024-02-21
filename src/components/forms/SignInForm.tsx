@@ -87,7 +87,7 @@ export function SignInWithPasswordForm(): JSX.Element {
           });
       }
 
-      //   router.push("/");
+      router.push("/");
     } catch (error) {
       console.error(error);
       generateToast({
